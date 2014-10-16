@@ -19,6 +19,9 @@ public class GestureLstr implements OnGestureListener {
 //	private static final int SWIPE_MAX_OFF_PATH = 125;
 	private static final int SWIPE_THRESHOLD_VELOCITY = 50;
 	private boolean isEnabled = false;
+	
+	// nothing to see here
+	int a = 100;
 
 	@Override
 	public boolean onDown(MotionEvent e) {
