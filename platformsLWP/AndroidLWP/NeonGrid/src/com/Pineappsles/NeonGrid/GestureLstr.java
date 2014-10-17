@@ -21,6 +21,8 @@ public class GestureLstr implements OnGestureListener {
 	private boolean isEnabled = false;
 
 	private boolean test = false;
+	
+	private boolean richarIsSoCool = true;
 
 	
 	// nothing to see here
