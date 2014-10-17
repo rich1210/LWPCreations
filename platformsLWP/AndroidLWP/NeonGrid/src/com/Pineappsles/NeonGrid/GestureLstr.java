@@ -23,6 +23,8 @@ public class GestureLstr implements OnGestureListener {
 	private boolean test = false;
 	
 	private boolean richarIsSoCool = true;
+	
+	private boolean alexIsSoNotCool = true;
 
 	
 	// nothing to see here
