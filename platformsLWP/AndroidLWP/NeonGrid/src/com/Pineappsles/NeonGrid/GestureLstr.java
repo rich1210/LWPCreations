@@ -20,25 +20,6 @@ public class GestureLstr implements OnGestureListener {
 	private static final int SWIPE_THRESHOLD_VELOCITY = 50;
 	private boolean isEnabled = false;
 
-<<<<<<< HEAD
-=======
-	private boolean test = false;
-	
-	private boolean richarIsSoCool = true;
-	
-	private boolean alexIsSoNotCool = true;
-
-	
-	// nothing to see here
-	int a = 100;
-
-	int b = 200;
-	
-	int c = 300;
-	
-	int d = 400; // final
-
->>>>>>> 154154e696383276abb90d01bf07a1b7ee8bf0d1
 	@Override
 	public boolean onDown(MotionEvent e) {
 		return false;
