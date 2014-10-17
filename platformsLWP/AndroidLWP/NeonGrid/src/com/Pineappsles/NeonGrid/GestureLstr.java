@@ -31,6 +31,8 @@ public class GestureLstr implements OnGestureListener {
 	int b = 200;
 	
 	int c = 300;
+	
+	int d = 400; // final
 
 	@Override
 	public boolean onDown(MotionEvent e) {
