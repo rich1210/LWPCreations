@@ -9,6 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.SurfaceHolder;
+import android.widget.Toast;
 
 import com.mirage.livewallpaper.glLibrary.*;
 import com.unity3d.player.UnityPlayer;
@@ -221,6 +222,17 @@ public class NeonGrid extends GLWallpaperService implements SharedPreferences.On
 		 * The method "SetRotation" exists in Unity attached to the
 		 * "Main Camera" inside the script "HomeSwitch"
 		 */
+		
+		// send unity color values, default is 1.0 
+		SharedPreferences myPrefsPlayer = getSharedPreferences("NeonGridLWSettings", 0);
+	
+		UnityPlayer.UnitySendMessage("Main Camera", "SetR", String.valueOf(myPrefsPlayer.getFloat("redVal", 1F)));
+		
+		UnityPlayer.UnitySendMessage("Main Camera", "SetG", String.valueOf(myPrefsPlayer.getFloat("greenVal", 1F)));
+		
+		UnityPlayer.UnitySendMessage("Main Camera", "SetB", String.valueOf(myPrefsPlayer.getFloat("blueVal", 1F)));
+				
+		
 		if (rotateCubes)
 			UnityPlayer.UnitySendMessage("Main Camera", "SetRotation", "yes");
 		else
@@ -232,6 +244,8 @@ public class NeonGrid extends GLWallpaperService implements SharedPreferences.On
 		 */
 		swipeEmul = this.pPrefs.getBoolean("swipeEmul", false);
 		simulateSwipe.isEnabled(swipeEmul);
+		
+		
 	}
 
 	/**

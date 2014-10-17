@@ -19,5 +19,11 @@
         android:key="swipeEmul"
         android:summary="@string/simulateSwipeSummary"
         android:title="@string/simulateSwipeTitle" />
-		
+	 
+	 <net.margaritov.preference.colorpicker.ColorPickerPreference
+        android:key="color2"
+        android:title="Color"
+        android:summary="Choose Cube Color"
+        android:defaultValue="0xffffffff"
+         />		
 </PreferenceScreen>
