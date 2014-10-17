@@ -15,6 +15,9 @@ public class cubeManager : MonoBehaviour {
 		public GameObject cube;
 		public string color;
 		public bool move;	
+		public bool colorSel;
+		public int colorSelCt; 
+		public int colorState; // 0 nothing 1 first color 2 second color
 	};
 			
 	// y variables for vector 3
@@ -33,7 +36,7 @@ public class cubeManager : MonoBehaviour {
 	public Material color2;
 	
 	// size of grid
-	static int scale = 20;
+	//static int scale = 16;
 	private float sizeOfBrick = 2f;
 	//location of cube in array of cubes
 	private int index; 
@@ -54,7 +57,7 @@ public class cubeManager : MonoBehaviour {
 	bool colorFirst;
 	
 	// size of array for cubes
-	static int size = scale*(scale-(scale/3));
+	static int size = 14*21;
 	brick[] myBricks = new brick[size];
 	
 	//test Var
@@ -62,12 +65,11 @@ public class cubeManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		int test = scale*scale; 
 		
 		
-		for(float z = 0; z < size*sizeOfBrick; z+=sizeOfBrick)
+		for(float z = 0; z < 14*sizeOfBrick; z+=sizeOfBrick)
 		{
-			for( float x = 0; x < scale*sizeOfBrick; x+=sizeOfBrick)
+			for( float x = 0; x < 21*sizeOfBrick; x+=sizeOfBrick)
 			{
 				myBricks[index].cube = (GameObject)Instantiate (myCube, new Vector3 (x, 0f, z), transform.rotation);
 				
@@ -75,39 +77,16 @@ public class cubeManager : MonoBehaviour {
 			}
 		}
 		
-
+		Debug.Log(" this man bricks " + size + " This many its trying to use " + index);
 		index = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-		if( colorChange)
-		{
-			for( int i = 0; i < size; i++)
-			{
-				ranColor = Random.Range(0, 100);
-			
-				if(  ranColor >= 0 && ranColor < 50 )
-				{
-					myBricks[i].cube.renderer.material.color = new Color(0f,0f,0f);
-				}
-				else
-				{
-					myBricks[i].cube.renderer.material.color = new Color(0f, 1f, 1f);
-				}
-			
-				
-			}
-			colorChange = false;	
-		}
-		
-			
+					
 			//check to see where each each brick is at that should be moving
 			moveBricks ();
-		
-			selectColor();
-		
+			changeColor();		
 		}
 	
 		void FixedUpdate() 
@@ -115,8 +94,7 @@ public class cubeManager : MonoBehaviour {
 		
 			// randomly select which brick to move and to what location
 			selectBrickMove();
-			
-
+			selectColor();
 		}
 	
 	
@@ -399,44 +377,54 @@ public class cubeManager : MonoBehaviour {
 		void selectColor()
 		{
 			// inishalizing color grid
-
-			colorCt++;
-			if( colorCt >= 70)
-			{ 
-				ranColor = Random.Range(0, 100);
-			
-				if(  ranColor >= 0 && ranColor < 50 )
-				{
-					colorFirst = false;
-				}
-				else
-				{
-					colorFirst = true;
-				}
-			
-				Debug.Log ("ranColor :" + ranColor + " " + "colorFirst :" + colorFirst + " " + "colorCt :" + colorCt);
-			
-				colorCt = 0; 
-				ranColorBrick = Random.Range(0, size);
-			
-				
-			}
 		
-			Debug.Log ( "ranColorBrick :" + ranColorBrick );
+			//this will slow down the color select
+			int brickRan = Random.Range (0, size);
+		
+				if( myBricks[brickRan].colorState == 0 )
+				{
+					int colorRan = Random.Range(0, 100);
 			
-			if(colorFirst)
-			{
-				 //myBricks[ranBrick].cube.renderer.material.color = new Color(0.5f,1f,1f);
-				myBricks[ranColorBrick].cube.renderer.material.color = Color.Lerp(myBricks[ranColorBrick].cube.renderer.material.color,
-																				new Color(0f,0f,0f),  smooth1 * Time.deltaTime);
-				colorCt++;
-			}
-			else
-			{
-				//myBricks[ranBrick].cube.renderer.material.color = new Color(1f,0.5f,1f);
-				myBricks[ranColorBrick].cube.renderer.material.color = Color.Lerp(myBricks[ranColorBrick].cube.renderer.material.color,
-																				new Color(0f, 1f, 0.0125f),  smooth1 * Time.deltaTime);
-				colorCt++;
-			}
+					if( colorRan > 50)
+						myBricks[brickRan].colorState = 1;
+					else
+						myBricks[brickRan].colorState = 2;
+				}
+			
 		}
+	
+	void changeColor()
+	{
+		 for( int i = 0; i < size; i++)
+		{
+			if(myBricks[i].colorState == 1)
+				{
+				
+					 //myBricks[ranBrick].cube.renderer.material.color = new Color(0.5f,1f,1f);
+					myBricks[i].cube.renderer.material.color = Color.Lerp(myBricks[i].cube.renderer.material.color,
+																					new Color(0f,0f,0f),  smooth1 * Time.deltaTime);
+					
+					myBricks[i].colorSelCt++;
+					if( myBricks[i].colorSelCt > 350)
+					{
+						myBricks[i].colorSelCt = 0;
+						myBricks[i].colorState = 0;
+					}
+						
+				}
+			else if(myBricks[i].colorState == 2)
+				{
+				
+					//myBricks[ranBrick].cube.renderer.material.color = new Color(1f,0.5f,1f);
+					myBricks[i].cube.renderer.material.color = Color.Lerp(myBricks[i].cube.renderer.material.color,
+																					new Color(0f, 1f, 0.5f),  smooth1 * Time.deltaTime);
+					myBricks[i].colorSelCt++;
+					if( myBricks[i].colorSelCt > 350)
+					{
+						myBricks[i].colorSelCt = 0;
+						myBricks[i].colorState = 0;
+					}
+				}
+		}
+	}
 }

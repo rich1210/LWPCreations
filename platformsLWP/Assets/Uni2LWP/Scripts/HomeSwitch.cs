@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System;
+using System.Globalization;
 
 
 public class HomeSwitch : MonoBehaviour
@@ -13,14 +15,14 @@ public class HomeSwitch : MonoBehaviour
 
 	void LateUpdate ()
 	{
-		newPosition = new Vector3 ((camOffsetFactor - 0.5f) * scaleFactor, transform.position.y, transform.position.z);
-		transform.position = Vector3.Lerp (transform.position, newPosition, camSpeed);
+		//newPosition = new Vector3 ((camOffsetFactor - 0.5f) * scaleFactor, transform.position.y, transform.position.z);
+		//transform.position = Vector3.Lerp (transform.position, newPosition, camSpeed);
 	}
 
 
 	public void SetCamOffset (string offset)
 	{
-		float.TryParse (offset, out camOffsetFactor);
+		//float.TryParse (offset, out camOffsetFactor);
 	}
 
 	/// <summary>
@@ -82,7 +84,30 @@ public class HomeSwitch : MonoBehaviour
 		
 		
 	}
-
+	
+	static public float[] colorArray = new float[3];
+	
+	public void SetR( string color )
+	{
+		colorArray[0] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
+			
+	}
+	
+	public void SetG( string color)
+	{
+		colorArray[1] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
+	}
+	
+	public void SetB( string color)
+	{
+		
+		colorArray[2] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
+	}
+	
+	static public float[] getColor()
+	{
+		return colorArray;
+	}
 	
 	
 	/// <summary>

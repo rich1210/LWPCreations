@@ -65,6 +65,7 @@
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Opaque Diffuse.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurface Free Transparent Diffuse.shader" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Cut Out Diffuse.shader" />
+     <None Include="Assets\Uni2LWP\LWPTemplate\Uni2LWP\bin\AndroidManifest.xml" />
      <None Include="Assets\Uni2LWP\LWPTemplate\AdmobTemplate\admob_preference.xml" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurface Free Opaque Diffuse.shader" />
      <None Include="Assets\Uni2LWP\LWPTemplate\Uni2LWP\res\xml\wallpaper.xml" />
