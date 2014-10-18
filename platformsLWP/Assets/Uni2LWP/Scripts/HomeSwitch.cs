@@ -86,27 +86,48 @@ public class HomeSwitch : MonoBehaviour
 	}
 	
 	static public float[] colorArray = new float[3];
+	static public bool colorChange = false; 
 	
 	public void SetR( string color )
 	{
 		colorArray[0] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
-			
+		colorChange = true;
 	}
 	
 	public void SetG( string color)
 	{
 		colorArray[1] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
+		colorChange = true;
 	}
 	
 	public void SetB( string color)
 	{
 		
 		colorArray[2] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
+		colorChange = true;
 	}
 	
-	static public float[] getColor()
+	static public float getColor( int state )
 	{
-		return colorArray;
+		if( state == 0)
+			return colorArray[0];
+		if( state == 1)
+			return colorArray[1];
+		if( state == 2)
+			return colorArray[2];
+		else
+			return colorArray[0];
+		
+	}
+	
+	static public bool getColorChange()
+	{
+		return colorChange;
+	}
+	
+	static public void setColorChange(bool state)
+	{
+		colorChange = state; 
 	}
 	
 	

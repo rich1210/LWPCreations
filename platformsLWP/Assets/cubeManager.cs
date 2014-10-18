@@ -35,6 +35,10 @@ public class cubeManager : MonoBehaviour {
 	public Material color1;
 	public Material color2;
 	
+	//color vars
+	float R1 = 0f, G1 = 0f, B1 = 0f, //black
+		  R2 = 0f, G2 = 1f, B2 = 0.125f; // green
+	
 	// size of grid
 	//static int scale = 16;
 	private float sizeOfBrick = 2f;
@@ -83,6 +87,15 @@ public class cubeManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+			if( HomeSwitch.getColorChange())
+			{
+				R2 = HomeSwitch.getColor(0);
+				G2 = HomeSwitch.getColor(1);
+				B2 = HomeSwitch.getColor(2);
+			
+				HomeSwitch.setColorChange( false ); 
+			}
 					
 			//check to see where each each brick is at that should be moving
 			moveBricks ();
@@ -402,7 +415,7 @@ public class cubeManager : MonoBehaviour {
 				
 					 //myBricks[ranBrick].cube.renderer.material.color = new Color(0.5f,1f,1f);
 					myBricks[i].cube.renderer.material.color = Color.Lerp(myBricks[i].cube.renderer.material.color,
-																					new Color(0f,0f,0f),  smooth1 * Time.deltaTime);
+																					new Color(R1,G1,B1),  smooth1 * Time.deltaTime);
 					
 					myBricks[i].colorSelCt++;
 					if( myBricks[i].colorSelCt > 350)
@@ -417,7 +430,7 @@ public class cubeManager : MonoBehaviour {
 				
 					//myBricks[ranBrick].cube.renderer.material.color = new Color(1f,0.5f,1f);
 					myBricks[i].cube.renderer.material.color = Color.Lerp(myBricks[i].cube.renderer.material.color,
-																					new Color(0f, 1f, 0.5f),  smooth1 * Time.deltaTime);
+																					new Color(R2, G2, B2),  smooth1 * Time.deltaTime);
 					myBricks[i].colorSelCt++;
 					if( myBricks[i].colorSelCt > 350)
 					{
