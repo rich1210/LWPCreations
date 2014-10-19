@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\Uni2LWP\Scripts\HomeSwitch.cs" />
      <Compile Include="Assets\Uni2LWP\Scripts\Rotate.cs" />
+     <Compile Include="Assets\XYCoordantsScr.cs" />
      <Compile Include="Assets\cubeColor.cs" />
      <Compile Include="Assets\cubeManager.cs" />
      <None Include="Assets\Hard Surface Free\HardSurface Shaders\HardSurfacePro Hidden Front Cut Out Specular.shader" />
