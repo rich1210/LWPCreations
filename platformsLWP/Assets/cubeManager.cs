@@ -33,9 +33,11 @@ public class cubeManager : MonoBehaviour {
 	public Material color1;
 	public Material color2;
 	
+	
 	//color vars
 	float R1 = 0f, G1 = 0f, B1 = 0f, //black
 		  R2 = 0f, G2 = 1f, B2 = 0.125f; // green
+	int colorChance = 50; 
 	
 	// size of grid
 	//static int scale = 16;
@@ -52,11 +54,13 @@ public class cubeManager : MonoBehaviour {
 	float speedS = 0.0055f;
 	float smooth1 = 4.5f;
 	
+	/*
 	//How fast the cube changes color 
 	bool colorChange = true;
 	int colorCt;
 	int ranColorBrick;
 	bool colorFirst;
+	remove this if not needed*/
 	
 	// size of array for cubes
 	static int size = 14*21;
@@ -65,7 +69,7 @@ public class cubeManager : MonoBehaviour {
 	//test Var
 	int testCounter;
 	Vector3 testVec;
-	bool testing = true;
+	bool testing = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -114,6 +118,19 @@ public class cubeManager : MonoBehaviour {
 				B1 = HomeSwitch.getColor(5);
 			
 				HomeSwitch.setColorChange( false ); 
+			}
+		
+			//this if statement checks to see if the colorChance has changed in the settings 
+			// if it has then we change it 
+			if(HomeSwitch.getColorChance() != colorChance)
+			{
+				colorChance = HomeSwitch.getColorChance();
+				
+				if( testing)
+				{
+					colorChance = 50;
+				}
+				
 			}
 					
 			//check to see where each each brick is at that should be moving
@@ -322,7 +339,7 @@ public class cubeManager : MonoBehaviour {
 				{
 					int colorRan = Random.Range(0, 100);
 			
-					if( colorRan > 50)
+					if( colorRan <= colorChance)
 						myBricks[brickRan].colorState = 1;
 					else
 						myBricks[brickRan].colorState = 2;

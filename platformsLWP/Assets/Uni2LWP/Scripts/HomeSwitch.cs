@@ -85,6 +85,9 @@ public class HomeSwitch : MonoBehaviour
 		
 	}
 	
+	/// <summary>
+	/// The color array.
+	/// </summary>
 	static public float[] colorArray = new float[6];
 	static public bool colorChange = false; 
 	
@@ -154,6 +157,27 @@ public class HomeSwitch : MonoBehaviour
 	{
 		colorChange = state; 
 	}
+	
+	/// <summary>
+	/// Sets the color chance.
+	/// </summary>
+	
+	public static int chanceColor;
+	
+	public void SetColorChance( string color)
+	{
+		int variable;
+		
+		Int32.TryParse(color, out variable);
+		
+		chanceColor = variable;
+	}
+	
+	static public int getColorChance()
+	{
+		return chanceColor;
+	}
+	
 	
 	
 	/// <summary>
