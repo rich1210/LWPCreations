@@ -22,8 +22,16 @@
 	 
 	 <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="color2"
-        android:title="Color"
-        android:summary="Choose Cube Color"
+        android:title="Primary Color"
+        android:summary="Choose Primary Cube Color"
         android:defaultValue="0xffffffff"
          />		
+         
+	 <net.margaritov.preference.colorpicker.ColorPickerPreference
+        android:key="color3"
+        android:title="Secondary Color"
+        android:summary="Choose Secondary Cube Color"
+        android:defaultValue="0xffffffff"
+         />		
+	 
 </PreferenceScreen>

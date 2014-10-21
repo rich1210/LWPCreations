@@ -26,7 +26,7 @@ public class NeonGridSettings extends PreferenceActivity implements SharedPrefer
 		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 			 
 		
-		// get value of color picker
+		// get value of color picker PRIMARY
 	      ((ColorPickerPreference)findPreference("color2")).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 
 				@Override
@@ -54,6 +54,39 @@ public class NeonGridSettings extends PreferenceActivity implements SharedPrefer
 
 	        });
 	        ((ColorPickerPreference)findPreference("color2")).setAlphaSliderEnabled(false);
+	        
+	        
+	        
+	     // get value of color picker SECONDARY
+		      ((ColorPickerPreference)findPreference("color3")).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+					@Override
+					public boolean onPreferenceChange(Preference preference, Object newValue) {
+						String value = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(newValue)));
+					
+						// set up values
+						int red = Integer.decode("0x"+value.substring(3).substring(0, value.length()-7));
+						int green = Integer.decode("0x"+value.substring(5).substring(0, value.length()-7));
+						int blue = Integer.decode("0x"+value.substring(7).substring(0, value.length()-7));
+						float finalRed = (float) (red/255.00);
+						float finalGreen = (float) (green/255.0);
+						float finalBlue = (float) (blue/255.0);
+						
+						// save values for unity message
+						SharedPreferences myPrefsPlayer = getSharedPreferences("NeonGridLWSettings", 0);
+						SharedPreferences.Editor prefsEditorPlayer = myPrefsPlayer.edit();	
+						prefsEditorPlayer.putFloat("redVal2", finalRed );
+						prefsEditorPlayer.putFloat("greenVal2", finalGreen );
+						prefsEditorPlayer.putFloat("blueVal2", finalBlue );
+						prefsEditorPlayer.commit();
+						
+						return true;
+					}
+
+		        });
+		        ((ColorPickerPreference)findPreference("color3")).setAlphaSliderEnabled(false);
+			
+	        
 		
 	}
 

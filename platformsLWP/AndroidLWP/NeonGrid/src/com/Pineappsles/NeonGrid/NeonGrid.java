@@ -223,16 +223,6 @@ public class NeonGrid extends GLWallpaperService implements SharedPreferences.On
 		 * "Main Camera" inside the script "HomeSwitch"
 		 */
 		
-		// send unity color values, default is 1.0 
-		SharedPreferences myPrefsPlayer = getSharedPreferences("NeonGridLWSettings", 0);
-	
-		UnityPlayer.UnitySendMessage("Main Camera", "SetR", String.valueOf(myPrefsPlayer.getFloat("redVal", 1F)));
-		
-		UnityPlayer.UnitySendMessage("Main Camera", "SetG", String.valueOf(myPrefsPlayer.getFloat("greenVal", 1F)));
-		
-		UnityPlayer.UnitySendMessage("Main Camera", "SetB", String.valueOf(myPrefsPlayer.getFloat("blueVal", 1F)));
-				
-		
 		if (rotateCubes)
 			UnityPlayer.UnitySendMessage("Main Camera", "SetRotation", "yes");
 		else
@@ -246,6 +236,24 @@ public class NeonGrid extends GLWallpaperService implements SharedPreferences.On
 		simulateSwipe.isEnabled(swipeEmul);
 		
 		
+		// send unity color values, default is 1.0 PRIMARY
+		SharedPreferences myPrefsPlayer = getSharedPreferences("NeonGridLWSettings", 0);
+	
+		UnityPlayer.UnitySendMessage("Main Camera", "SetR1", String.valueOf(myPrefsPlayer.getFloat("redVal", 1F)));
+		
+		UnityPlayer.UnitySendMessage("Main Camera", "SetG1", String.valueOf(myPrefsPlayer.getFloat("greenVal", 1F)));
+		
+		UnityPlayer.UnitySendMessage("Main Camera", "SetB1", String.valueOf(myPrefsPlayer.getFloat("blueVal", 1F)));
+				
+				
+		// send unity color values, default is 1.0 SECONDARY
+		UnityPlayer.UnitySendMessage("Main Camera", "SetR2", String.valueOf(myPrefsPlayer.getFloat("redVal2", 1F)));
+		
+		UnityPlayer.UnitySendMessage("Main Camera", "SetG2", String.valueOf(myPrefsPlayer.getFloat("greenVal2", 1F)));
+		
+		UnityPlayer.UnitySendMessage("Main Camera", "SetB2", String.valueOf(myPrefsPlayer.getFloat("blueVal2", 1F)));
+				
+
 	}
 
 	/**
