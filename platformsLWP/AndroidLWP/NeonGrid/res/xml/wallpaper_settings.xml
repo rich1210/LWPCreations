@@ -3,35 +3,42 @@
     android:key="wallpaper_settings"
     android:title="@string/wallpaper_settings" >
 
-	<!-- Ad Placeholder -->
+    <!-- Ad Placeholder -->
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="rotate"
         android:summary="@string/rotateSummary"
         android:title="@string/rotateTitle" />
-	<CheckBoxPreference
+    <CheckBoxPreference
         android:defaultValue="true"
         android:key="doubleTap"
         android:summary="@string/doubleTapSummary"
         android:title="@string/doubleTapTitle" />
-	<CheckBoxPreference
+    <CheckBoxPreference
         android:defaultValue="false"
         android:key="swipeEmul"
         android:summary="@string/simulateSwipeSummary"
         android:title="@string/simulateSwipeTitle" />
-	 
-	 <net.margaritov.preference.colorpicker.ColorPickerPreference
+
+    <net.margaritov.preference.colorpicker.ColorPickerPreference
+        android:defaultValue="0xffffffff"
         android:key="color2"
-        android:title="Primary Color"
         android:summary="Choose Primary Cube Color"
+        android:title="Primary Color" />
+    <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:defaultValue="0xffffffff"
-         />		
-         
-	 <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="color3"
-        android:title="Secondary Color"
         android:summary="Choose Secondary Cube Color"
-        android:defaultValue="0xffffffff"
-         />		
-	 
+        android:title="Secondary Color" />
+
+    <SeekBarPreference
+        android:key = "seek"
+        android:defaultValue="80"
+        android:dialogMessage="idk message"
+        android:max="100"
+        android:summary="idk sum"
+        android:text=" %"
+        android:title="idk title" />
+    
+
 </PreferenceScreen>

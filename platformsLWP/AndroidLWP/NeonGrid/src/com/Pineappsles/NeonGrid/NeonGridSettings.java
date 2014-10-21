@@ -6,13 +6,21 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * Preference change listener.
  */
-public class NeonGridSettings extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-
+public class NeonGridSettings extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener,  SeekBar.OnSeekBarChangeListener {
+	private SeekBar mSeekBar;
+	
+	
+	
+	
+	
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 	}
@@ -25,6 +33,10 @@ public class NeonGridSettings extends PreferenceActivity implements SharedPrefer
 		addPreferencesFromResource(R.xml.wallpaper_settings);
 		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 			 
+		
+		
+	
+		
 		
 		// get value of color picker PRIMARY
 	      ((ColorPickerPreference)findPreference("color2")).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -90,10 +102,47 @@ public class NeonGridSettings extends PreferenceActivity implements SharedPrefer
 		
 	}
 
+	
 	@Override
 	protected void onDestroy() {
 		getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
 		super.onDestroy();
 	}
 
+	@Override
+	public void onProgressChanged(SeekBar seekBar, int progress,
+			boolean fromUser) {
+		// TODO Auto-generated method stub
+	
+	    if (mSeekBar != null)
+	      mSeekBar.setProgress(progress); 
+	    
+	 // save values for unity message
+		SharedPreferences myPrefsPlayer = getSharedPreferences("NeonGridLWSettings", 0);
+		SharedPreferences.Editor prefsEditorPlayer = myPrefsPlayer.edit();	
+		prefsEditorPlayer.putInt("seek", progress );
+		prefsEditorPlayer.commit();
+		
+	// would update a text view here
+		//tv.setText(Integer.toString(progress)+"%");
+	
+		
+	}
+
+	@Override
+	public void onStartTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStopTrackingTouch(SeekBar seekBar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+	
+	
 }
