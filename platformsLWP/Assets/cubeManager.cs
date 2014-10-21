@@ -27,12 +27,6 @@ public class cubeManager : MonoBehaviour {
 	
 	// game objects
 	public GameObject myCube;
-	//public GameObject myLight; 
-	
-	// materals of the cubes to change color
-	public Material color1;
-	public Material color2;
-	
 	
 	//color vars
 	float R1 = 0f, G1 = 0f, B1 = 0f, //black
@@ -80,6 +74,7 @@ public class cubeManager : MonoBehaviour {
 			for( float x = 0; x < 21*sizeOfBrick; x+=sizeOfBrick)
 			{
 				myBricks[index].cube = (GameObject)Instantiate (myCube, new Vector3 (x, 0f, z), transform.rotation);
+				myBricks[index].cube.name = "Cube" + index.ToString();;
 				
 				index++;
 			}
@@ -138,7 +133,7 @@ public class cubeManager : MonoBehaviour {
 			changeColor();		
 		}
 	
-		void FixedUpdate() 
+	void FixedUpdate() 
 		{
 		
 			// randomly select which brick to move and to what location
@@ -147,7 +142,7 @@ public class cubeManager : MonoBehaviour {
 		}
 	
 	
-		void selectBrickMove()
+	void selectBrickMove()
 		{
 			// ranMove is randomly genorated from 0 to 100 and caught by 5 if statments
 			// all ranging 10 values so each loation has a 10/100 changce of getting hit
@@ -210,7 +205,7 @@ public class cubeManager : MonoBehaviour {
 		
 			
 		}
-		void moveBricks()
+	void moveBricks()
 		{
 		
 			for( index = 0; index < size; index++ )
@@ -328,7 +323,7 @@ public class cubeManager : MonoBehaviour {
 		// end of for loop
 		}
 	}
-		void selectColor()
+	void selectColor()
 		{
 			// inishalizing color grid
 		
@@ -381,4 +376,5 @@ public class cubeManager : MonoBehaviour {
 				}
 		}
 	}
+	
 }
