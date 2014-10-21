@@ -38,7 +38,7 @@
         android:max="100"
         android:summary="idk sum"
         android:text=" %"
-        android:title="idk title" />
+        android:title="Primary Color Cube Percent" />
     
 
 </PreferenceScreen>

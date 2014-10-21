@@ -253,8 +253,8 @@ public class NeonGrid extends GLWallpaperService implements SharedPreferences.On
 		
 		UnityPlayer.UnitySendMessage("Main Camera", "SetB2", String.valueOf(myPrefsPlayer.getFloat("blueVal2", 1F)));
 		
-		// percent
-		UnityPlayer.UnitySendMessage("Main Camera", "SetColorChance", String.valueOf(myPrefsPlayer.getInt("seek", 1)));
+		// percent default 50
+		UnityPlayer.UnitySendMessage("Main Camera", "SetColorChance", String.valueOf(myPrefsPlayer.getInt("seek", 50)));
 
 	}
 
