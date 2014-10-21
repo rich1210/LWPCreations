@@ -85,25 +85,47 @@ public class HomeSwitch : MonoBehaviour
 		
 	}
 	
-	static public float[] colorArray = new float[3];
+	/// <summary>
+	/// The color array.
+	/// </summary>
+	static public float[] colorArray = new float[6];
 	static public bool colorChange = false; 
 	
-	public void SetR( string color )
+	public void SetR1( string color )
 	{
 		colorArray[0] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
 		colorChange = true;
 	}
 	
-	public void SetG( string color)
+	public void SetG1( string color)
 	{
 		colorArray[1] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
 		colorChange = true;
 	}
 	
-	public void SetB( string color)
+	public void SetB1( string color)
 	{
 		
 		colorArray[2] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
+		colorChange = true;
+	}
+	
+	public void SetR2( string color )
+	{
+		colorArray[3] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
+		colorChange = true;
+	}
+	
+	public void SetG2( string color)
+	{
+		colorArray[4] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
+		colorChange = true;
+	}
+	
+	public void SetB2( string color)
+	{
+		
+		colorArray[5] = float.Parse( color, CultureInfo.InvariantCulture.NumberFormat);
 		colorChange = true;
 	}
 	
@@ -115,6 +137,12 @@ public class HomeSwitch : MonoBehaviour
 			return colorArray[1];
 		if( state == 2)
 			return colorArray[2];
+		if( state == 3)
+			return colorArray[3];
+		if( state == 4)
+			return colorArray[4];
+		if(state == 5)
+			return colorArray[5];
 		else
 			return colorArray[0];
 		
@@ -129,6 +157,27 @@ public class HomeSwitch : MonoBehaviour
 	{
 		colorChange = state; 
 	}
+	
+	/// <summary>
+	/// Sets the color chance.
+	/// </summary>
+	
+	public static int chanceColor;
+	
+	public void SetColorChance( string color)
+	{
+		int variable;
+		
+		Int32.TryParse(color, out variable);
+		
+		chanceColor = variable;
+	}
+	
+	static public int getColorChance()
+	{
+		return chanceColor;
+	}
+	
 	
 	
 	/// <summary>

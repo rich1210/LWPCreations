@@ -23,21 +23,21 @@ public class cubeManager : MonoBehaviour {
 	// y variables for vector 3
 	float pos1 = 0f,
 		pos2 = 0.7f,
-		pos3 = 0.7f,
-		pos4 = -0.7f,
-		pos5 = -0.7f;
+		pos3 = -0.7f;
 	
 	// game objects
 	public GameObject myCube;
-	public GameObject myLight; 
+	//public GameObject myLight; 
 	
 	// materals of the cubes to change color
 	public Material color1;
 	public Material color2;
 	
+	
 	//color vars
 	float R1 = 0f, G1 = 0f, B1 = 0f, //black
 		  R2 = 0f, G2 = 1f, B2 = 0.125f; // green
+	int colorChance = 50; 
 	
 	// size of grid
 	//static int scale = 16;
@@ -54,11 +54,13 @@ public class cubeManager : MonoBehaviour {
 	float speedS = 0.0055f;
 	float smooth1 = 4.5f;
 	
+	/*
 	//How fast the cube changes color 
 	bool colorChange = true;
 	int colorCt;
 	int ranColorBrick;
 	bool colorFirst;
+	remove this if not needed*/
 	
 	// size of array for cubes
 	static int size = 14*21;
@@ -66,7 +68,9 @@ public class cubeManager : MonoBehaviour {
 	
 	//test Var
 	int testCounter;
-
+	Vector3 testVec;
+	bool testing = false;
+	
 	// Use this for initialization
 	void Start () {
 		
@@ -88,13 +92,45 @@ public class cubeManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+			if(testing)
+			{
+				if(testCounter >= size)
+				{
+					testCounter = 0;
+					testing = false;
+				}
+				
+				testVec = myBricks[testCounter].cube.transform.position + new Vector3( 0, 1, 0);		
+				myBricks[testCounter].cube.transform.position = testVec;
+			
+				testCounter++;
+			}
+		
+			//changing the color of the tiles with settings from unity
 			if( HomeSwitch.getColorChange())
 			{
 				R2 = HomeSwitch.getColor(0);
 				G2 = HomeSwitch.getColor(1);
 				B2 = HomeSwitch.getColor(2);
 			
+				R1 = HomeSwitch.getColor(3);
+				G1 = HomeSwitch.getColor(4);
+				B1 = HomeSwitch.getColor(5);
+			
 				HomeSwitch.setColorChange( false ); 
+			}
+		
+			//this if statement checks to see if the colorChance has changed in the settings 
+			// if it has then we change it 
+			if(HomeSwitch.getColorChance() != colorChance)
+			{
+				colorChance = HomeSwitch.getColorChance();
+				
+				if( testing)
+				{
+					colorChance = 50;
+				}
+				
 			}
 					
 			//check to see where each each brick is at that should be moving
@@ -124,7 +160,7 @@ public class cubeManager : MonoBehaviour {
 			
 			//myBricks[10].cube.transform.Translate(0f, speed, 0f); 
 			
-			if( ranMove >= 0 && ranMove <= 20)
+			if( ranMove >= 0 && ranMove <= 33)
 			{
 				while( myBricks[ranBrick].move == true )
 				{
@@ -139,7 +175,7 @@ public class cubeManager : MonoBehaviour {
 			}
 		
 			//pos1
-			if( ranMove >= 21 && ranMove <= 40)
+			if( ranMove >= 34 && ranMove <= 66)
 			{
 				while( myBricks[ranBrick].move == true )
 				{
@@ -155,7 +191,7 @@ public class cubeManager : MonoBehaviour {
 			}
 			
 			//pos2
-			if( ranMove >= 41 && ranMove <= 60)
+			if( ranMove >= 67 && ranMove <= 99)
 			{
 			
 				while( myBricks[ranBrick].move == true )
@@ -171,37 +207,7 @@ public class cubeManager : MonoBehaviour {
 				}
 			}
 			
-			if( ranMove >= 61 && ranMove <= 80)
-			{
-			
-				while( myBricks[ranBrick].move == true )
-				{
-					ranBrick = Random.Range(0, size);
-				}
-			
-				if( myBricks[ranBrick].move != true)
-				{
-				//Debug.Log("pos4 with :" + ranBrick);
-				myBricks[ranBrick].move = true;
-				myBricks[ranBrick].pos = 3;
-				}
-			}
-			
-			//Pos3
-			if( ranMove >= 81 && ranMove <= 100)
-			{
-				while( myBricks[ranBrick].move == true )
-				{
-					ranBrick = Random.Range(0, size);
-				}
-			
-				if( myBricks[ranBrick].move != true)
-				{
-				//Debug.Log("pos5 with :" + ranBrick);
-				myBricks[ranBrick].move = true;
-				myBricks[ranBrick].pos = 4;
-				}
-			}
+		
 			
 		}
 		void moveBricks()
@@ -215,9 +221,6 @@ public class cubeManager : MonoBehaviour {
 					switch(myBricks[index].pos)
 					{
 					case 0:
-					
-						
-		
 						// if it is less then then we move up 
 						if( myBricks[index].cube.transform.position.y <= pos1-0.05f) 
 						{ 
@@ -318,68 +321,6 @@ public class cubeManager : MonoBehaviour {
 							myBricks[index].move = false;
 						}
 					break;
-					case 3:
-						
-						// if it is less then then we move up 
-						if( myBricks[index].cube.transform.position.y <= pos4-0.05f) 
-						{ 
-							if( myBricks[index].cube.transform.position.y <= pos4-0.3f)
-							{
-								myBricks[index].cube.transform.Translate(0f, speed1, 0f);
-							}
-							else
-							{
-								myBricks[index].cube.transform.Translate(0f, speedS, 0f);
-							}
-						}
-						// if it is not = to or < then we know it is > then so we move down
-						else if( myBricks[index].cube.transform.position.y >= pos4+0.05f)
-						{ 
-							if( myBricks[index].cube.transform.position.y >= pos4+0.3f)
-							{
-								myBricks[index].cube.transform.Translate(0f, -speed1, 0f);
-							}
-							else
-							{
-								myBricks[index].cube.transform.Translate(0f, -speedS, 0f);
-							}
-						}
-						else
-						{
-							myBricks[index].move = false;
-						}
-					break;
-					case 4:
-						
-						// if it is less then then we move up 
-						if( myBricks[index].cube.transform.position.y <= pos5-0.05f) 
-						{ 
-							if( myBricks[index].cube.transform.position.y <= pos5-0.3f)
-							{
-								myBricks[index].cube.transform.Translate(0f, speed1, 0f);
-							}
-							else
-							{
-								myBricks[index].cube.transform.Translate(0f, speedS, 0f);
-							}
-						}
-						// if it is not = to or < then we know it is > then so we move down
-						else if( myBricks[index].cube.transform.position.y >= pos5+0.05f)
-						{ 
-							if( myBricks[index].cube.transform.position.y >= pos5+0.3f)
-							{
-								myBricks[index].cube.transform.Translate(0f, -speed1, 0f);
-							}
-							else
-							{
-								myBricks[index].cube.transform.Translate(0f, -speedS, 0f);
-							}
-						}
-						else
-						{
-							myBricks[index].move = false;
-						}
-					break;
 					
 					}
 				//end of if move = true
@@ -398,7 +339,7 @@ public class cubeManager : MonoBehaviour {
 				{
 					int colorRan = Random.Range(0, 100);
 			
-					if( colorRan > 50)
+					if( colorRan <= colorChance)
 						myBricks[brickRan].colorState = 1;
 					else
 						myBricks[brickRan].colorState = 2;
