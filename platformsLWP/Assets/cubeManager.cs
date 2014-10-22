@@ -31,7 +31,7 @@ public class cubeManager : MonoBehaviour {
 	//color vars
 	float R1 = 0f, G1 = 0f, B1 = 0f, //black
 		  R2 = 0f, G2 = 1f, B2 = 0.125f; // green
-	int colorChance = 50; 
+	int colorChance = 100; 
 	
 	// size of grid
 	//static int scale = 16;
@@ -60,6 +60,7 @@ public class cubeManager : MonoBehaviour {
 	static int size = 14*21;
 	brick[] myBricks = new brick[size];
 	
+	
 	//test Var
 	int testCounter;
 	Vector3 testVec;
@@ -80,7 +81,6 @@ public class cubeManager : MonoBehaviour {
 			}
 		}
 		
-		Debug.Log(" this man bricks " + size + " This many its trying to use " + index);
 		index = 0;
 	}
 	
@@ -101,7 +101,30 @@ public class cubeManager : MonoBehaviour {
 				testCounter++;
 			}
 		
-			//changing the color of the tiles with settings from unity
+			
+			
+			pushPullBrick();
+			
+			// function that checks the settings in HomeSwitcher to see if anything needs be changed
+			changeSettings();
+			//check to see where each each brick is at that should be moving
+			moveBricks ();
+			changeColor();		
+		}
+	
+	void FixedUpdate() 
+		{
+			// randomly select which brick to move and to what location
+			selectBrickMove();
+			selectColor();
+		}
+	
+	/// <summary>
+	/// Changes the settings.
+	/// </summary>/
+	void changeSettings()
+	{
+					//changing the color of the tiles with settings from unity
 			if( HomeSwitch.getColorChange())
 			{
 				R2 = HomeSwitch.getColor(0);
@@ -123,25 +146,14 @@ public class cubeManager : MonoBehaviour {
 				
 				if( testing)
 				{
-					colorChance = 50;
+					colorChance = 100;
 				}
 				
 			}
-					
-			//check to see where each each brick is at that should be moving
-			moveBricks ();
-			changeColor();		
-		}
-	
-	void FixedUpdate() 
-		{
-		
-			// randomly select which brick to move and to what location
-			selectBrickMove();
-			selectColor();
-		}
-	
-	
+	}
+	/// <summary>
+	/// Selects the brick move.
+	/// </summary>
 	void selectBrickMove()
 		{
 			// ranMove is randomly genorated from 0 to 100 and caught by 5 if statments
@@ -205,6 +217,9 @@ public class cubeManager : MonoBehaviour {
 		
 			
 		}
+	/// <summary>
+	/// Moves the bricks.
+	/// </summary>
 	void moveBricks()
 		{
 		
@@ -323,25 +338,30 @@ public class cubeManager : MonoBehaviour {
 		// end of for loop
 		}
 	}
+	/// <summary>
+	/// Selects the color.
+	/// </summary>
 	void selectColor()
 		{
 			// inishalizing color grid
 		
 			//this will slow down the color select
-			int brickRan = Random.Range (0, size);
+			int brickRan = Random.Range (0, size-1);
 		
 				if( myBricks[brickRan].colorState == 0 )
 				{
-					int colorRan = Random.Range(0, 100);
+					int colorRan = Random.Range(1, 100);
 			
-					if( colorRan <= colorChance)
+					if( colorRan <= colorChance) 
 						myBricks[brickRan].colorState = 1;
 					else
 						myBricks[brickRan].colorState = 2;
 				}
 			
 		}
-	
+	/// <summary>
+	/// Changes the color.
+	/// </summary>
 	void changeColor()
 	{
 		 for( int i = 0; i < size; i++)
@@ -376,5 +396,13 @@ public class cubeManager : MonoBehaviour {
 				}
 		}
 	}
+	/// <summary>
+	/// Pushs the pull brick.
+	/// </summary>
+	void pushPullBrick()
+	{
+		Debug.Log( "Message sent is :" + VectorsScr.getBoxName());
+	}
+	
 	
 }

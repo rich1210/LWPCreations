@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class ColliderScr : MonoBehaviour {
+	
 
 	// Use this for initialization
 	void Start () {
@@ -18,21 +19,12 @@ public class ColliderScr : MonoBehaviour {
 	{
 		//if( other.name == "fingerPtr")
 		Debug.Log ("Object entered the trigger " + other.name);
+		
+		// send a message to cubeManager
+		VectorsScr.setBoxName(other.name);
+		
+		// distroy our selfs when colliding with boxes
+		Destroy(gameObject);
 	}
-	
-	void onTriggerStay (Collider other)
-	{
-		//if( other.name == "fingerPtr")
-		Debug.Log ("Object is within trigger");
-	}
-	
-	void onTriggerExit (Collider other)
-	{
-		//if( other.name == "fingerPtr")
-		Debug.Log ("Object has left the trigger");
-	}
-	
-	
-
 	
 }

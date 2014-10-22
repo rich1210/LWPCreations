@@ -6,7 +6,7 @@ using System.Globalization;
 
 public class HomeSwitch : MonoBehaviour
 {
-	public float scaleFactor = 4f;
+	public float scaleFactor = 27f;
 	private float camOffsetFactor = 0.5f;
 	public float camSpeed = 0.10f;
 	private Vector3 newPosition;
@@ -15,14 +15,14 @@ public class HomeSwitch : MonoBehaviour
 
 	void LateUpdate ()
 	{
-		//newPosition = new Vector3 ((camOffsetFactor - 0.5f) * scaleFactor, transform.position.y, transform.position.z);
+		newPosition = new Vector3 ((camOffsetFactor - 0.5f) * scaleFactor, transform.position.y, transform.position.z);
 		//transform.position = Vector3.Lerp (transform.position, newPosition, camSpeed);
 	}
 
 
 	public void SetCamOffset (string offset)
 	{
-		//float.TryParse (offset, out camOffsetFactor);
+		float.TryParse (offset, out camOffsetFactor);
 	}
 
 	/// <summary>
@@ -195,6 +195,20 @@ public class HomeSwitch : MonoBehaviour
 		if (touchCoord!=null){
 			touchCoord.text = "(" + pos.x + "," + pos.y + ")";
 		}
+	}
+	
+	public static bool touchingScreen = false;
+	void IsTouching( string other)
+	{
+		if( other == "yes")
+			touchingScreen = true;
+		else
+			touchingScreen = false;
+	}
+	
+	public static bool GetTouching()
+	{
+		return touchingScreen;
 	}
 
 	

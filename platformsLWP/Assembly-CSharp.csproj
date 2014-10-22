@@ -47,6 +47,7 @@
      <Compile Include="Assets\ColliderScr.cs" />
      <Compile Include="Assets\Uni2LWP\Scripts\HomeSwitch.cs" />
      <Compile Include="Assets\Uni2LWP\Scripts\Rotate.cs" />
+     <Compile Include="Assets\VectorsScr.cs" />
      <Compile Include="Assets\XYCoordantsScr.cs" />
      <Compile Include="Assets\cubeColor.cs" />
      <Compile Include="Assets\cubeManager.cs" />
