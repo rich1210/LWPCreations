@@ -1,11 +1,14 @@
 package com.Pineappsles.NeonGrid;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
+import android.app.WallpaperManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -35,7 +38,16 @@ public class NeonGridSettings extends PreferenceActivity implements SharedPrefer
 			 
 		
 		
-	
+		 Preference other = (Preference) findPreference("setWallpaper");
+		    other.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		        public boolean onPreferenceClick(Preference preference) {
+		        	Intent intent = new Intent();
+		    		intent.setAction(WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER);
+		    		startActivity(intent);
+		    		Toast.makeText(getApplicationContext(), "Choose 'Neon Flux' from the list of livewallpapers", Toast.LENGTH_LONG).show();
+		        	return false; 
+		         }
+		    });  
 		
 		
 		// get value of color picker PRIMARY

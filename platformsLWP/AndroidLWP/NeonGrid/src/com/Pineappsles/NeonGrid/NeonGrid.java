@@ -61,7 +61,6 @@ public class NeonGrid extends GLWallpaperService implements SharedPreferences.On
 	 * being removed.
 	 */
 	public void onDestroy() {
-		
 	
 		super.onDestroy();
 	
@@ -140,6 +139,7 @@ public class NeonGrid extends GLWallpaperService implements SharedPreferences.On
 			
 		}
 
+	
 		public void onSurfaceCreated(SurfaceHolder holder) {
 			
 			
@@ -171,6 +171,9 @@ public class NeonGrid extends GLWallpaperService implements SharedPreferences.On
 				 * the "Main Camera" inside the script "HomeSwitch"
 				 */
 				UnityPlayer.UnitySendMessage("Main Camera", "SetCamOffset", String.valueOf(xOffset));
+				
+				Toast.makeText(getBaseContext(), "change", Toast.LENGTH_LONG).show();
+
 			}
 		}
 
@@ -180,10 +183,22 @@ public class NeonGrid extends GLWallpaperService implements SharedPreferences.On
 		 * player.onTouchEvent doesn't work when we rotate the device.
 		 */
 		public void onTouchEvent(MotionEvent paramMotionEvent) {
-			if (player != null) {
-				// player.onTouchEvent(paramMotionEvent);
-				UnityPlayer.UnitySendMessage("Main Camera", "SendTouchXY", (paramMotionEvent.getX() + "," + paramMotionEvent.getY()));
-			}
+			if (player != null) 
+				{
+							
+					if ( paramMotionEvent.getAction() == MotionEvent.ACTION_UP )
+						{
+						 UnityPlayer.UnitySendMessage("Main Camera", "IsTouching", "no");
+						}
+					if ( paramMotionEvent.getAction() == MotionEvent.ACTION_DOWN )
+						{
+						 UnityPlayer.UnitySendMessage("Main Camera", "IsTouching", "yes");
+						}
+					
+					UnityPlayer.UnitySendMessage("Main Camera", "SendTouchXY", (paramMotionEvent.getX() + "," + paramMotionEvent.getY()));
+
+					
+				}
 			gd.onTouchEvent(paramMotionEvent);
 		}
 

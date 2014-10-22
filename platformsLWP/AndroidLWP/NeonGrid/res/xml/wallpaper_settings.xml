@@ -3,7 +3,11 @@
     android:key="wallpaper_settings"
     android:title="@string/wallpaper_settings" >
 
-    <!-- Ad Placeholder -->
+ 	<Preference
+        android:key="setWallpaper"
+        android:summary="Click to set this as the live wallpaper"
+        android:title="Set Wallpaper" />  
+
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="rotate"
@@ -33,7 +37,7 @@
 
     <SeekBarPreference
         android:key = "seek"
-        android:defaultValue="80"
+        android:defaultValue="50"
         android:dialogMessage="idk message"
         android:max="100"
         android:summary="idk sum"
