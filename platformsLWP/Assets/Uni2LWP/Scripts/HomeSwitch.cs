@@ -179,6 +179,7 @@ public class HomeSwitch : MonoBehaviour
 	}
 	
 	
+	public static double xCoor, yCoor; 
 	
 	/// <summary>
 	/// Receives XY touch values. 
@@ -195,6 +196,24 @@ public class HomeSwitch : MonoBehaviour
 		if (touchCoord!=null){
 			touchCoord.text = "(" + pos.x + "," + pos.y + ")";
 		}
+		
+		//convert pixals in to unity varibles  17.6
+		//23
+		xCoor = (pos.x/16.3f)-39;
+		
+		//44
+		yCoor = (pos.y/-14.5f) + 30;
+		
+	
+		
+	}
+	
+	public static double getXY( int index)
+	{
+		if( index == 0)
+			return xCoor;
+		else
+			return yCoor;
 	}
 	
 	public static bool touchingScreen = false;

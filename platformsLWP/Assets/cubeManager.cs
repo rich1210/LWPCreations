@@ -401,7 +401,7 @@ public class cubeManager : MonoBehaviour {
 	/// </summary>
 	void pushPullBrick()
 	{
-		Debug.Log( "Message sent is :" + VectorsScr.getBoxName());
+		//Debug.Log( "Message sent is :" + VectorsScr.getBoxName());
 	}
 	
 	

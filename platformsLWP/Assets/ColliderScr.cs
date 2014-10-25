@@ -18,7 +18,7 @@ public class ColliderScr : MonoBehaviour {
 	void OnTriggerEnter (Collider other)
 	{
 		//if( other.name == "fingerPtr")
-		Debug.Log ("Object entered the trigger " + other.name);
+		//Debug.Log ("Object entered the trigger " + other.name);
 		
 		// send a message to cubeManager
 		VectorsScr.setBoxName(other.name);

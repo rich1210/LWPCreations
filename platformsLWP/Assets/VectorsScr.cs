@@ -6,7 +6,8 @@ public class VectorsScr : MonoBehaviour {
 	public GameObject bullets;
 	float[] camera = new float[6];
 	int counter = 0;
-	
+	bool testing = false, testingX = false, testingY = false;
+	float testXPx, testYPx, testXU, testYU;
 
 	// Use this for initialization
 	void Start () {
@@ -23,16 +24,54 @@ public class VectorsScr : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(HomeSwitch.GetTouching())
+		if(HomeSwitch.GetTouching() || testing )
 		{
 			if( counter%5 == 0)
 			{
 				//create a bullet object at the the center 
-				GameObject newCube = (GameObject)Instantiate (bullets, new Vector3 (camera[0], camera[1], camera[2]), transform.rotation);
+				//GameObject newCube = (GameObject)Instantiate (bullets, new Vector3 (camera[0], camera[1], camera[2]), transform.rotation);
+				GameObject newCube = (GameObject)Instantiate (bullets, new Vector3 (100f, 100f, 100f), transform.rotation);
+				//This puts the cube under the camra
+				 newCube.transform.parent = gameObject.transform;
+				//Move newCube in to center of the camra 
+			
+				newCube.transform.position = new Vector3(camera[0], camera[1], camera[2]);
+			
+				//inizalize rotation
+				//newCube.transform.Rotate(camera[3]-45,camera[4]+20,camera[5]);
+				if(testing)
+				{
+					if(testingX)
+					{
+						testXPx += 10f;
+						if( testXPx >= 750)
+							testXPx = 0;
+						
+						testXU = (testXPx/-17.6f)+23;
+						
+						newCube.transform.Rotate(testXU,0,0);
+					}
+					
+					if(testingY)
+					{
+						testYPx += 10f;
+						if( testYPx >= 1230)
+							testYPx = 0;
+						
+						testYU = (testYPx/14.5f) - 44;
+						
+						newCube.transform.Rotate(0,testYU,0);
+					}
+					
+					Debug.Log("Got to here :" + "px :" + testXPx + " unity :" + testXU);
+				}
+				else
+				{
+					newCube.transform.Rotate((float)HomeSwitch.getXY(1),(float)HomeSwitch.getXY(0),0);
+				}
+				
 				//force
 				newCube.constantForce.relativeForce = new Vector3(0, 0, 1000);
-				//inizalize rotation
-				newCube.transform.Rotate(camera[3]-45,camera[4]+20,camera[5]);
 				//rotate the object
 				//newCube.transform.Rotate(10,0,0);
 			}
