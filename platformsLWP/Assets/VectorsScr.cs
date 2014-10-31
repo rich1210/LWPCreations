@@ -24,9 +24,9 @@ public class VectorsScr : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(HomeSwitch.GetTouching() || testing )
+		if(HomeSwitch.GetTouching() )
 		{
-			if( counter%5 == 0)
+			if( counter%5 == 0) // amount of bullets fired in a second 27/5 per sec
 			{
 				//create a bullet object at the the center 
 				//GameObject newCube = (GameObject)Instantiate (bullets, new Vector3 (camera[0], camera[1], camera[2]), transform.rotation);
@@ -37,38 +37,9 @@ public class VectorsScr : MonoBehaviour {
 			
 				newCube.transform.position = new Vector3(camera[0], camera[1], camera[2]);
 			
-				//inizalize rotation
-				//newCube.transform.Rotate(camera[3]-45,camera[4]+20,camera[5]);
-				if(testing)
-				{
-					if(testingX)
-					{
-						testXPx += 10f;
-						if( testXPx >= 750)
-							testXPx = 0;
-						
-						testXU = (testXPx/-17.6f)+23;
-						
-						newCube.transform.Rotate(testXU,0,0);
-					}
-					
-					if(testingY)
-					{
-						testYPx += 10f;
-						if( testYPx >= 1230)
-							testYPx = 0;
-						
-						testYU = (testYPx/14.5f) - 44;
-						
-						newCube.transform.Rotate(0,testYU,0);
-					}
-					
-					Debug.Log("Got to here :" + "px :" + testXPx + " unity :" + testXU);
-				}
-				else
-				{
-					newCube.transform.Rotate((float)HomeSwitch.getXY(1),(float)HomeSwitch.getXY(0),0);
-				}
+				
+				newCube.transform.Rotate((float)HomeSwitch.getXY(1),(float)HomeSwitch.getXY(0),0);
+				
 				
 				//force
 				newCube.constantForce.relativeForce = new Vector3(0, 0, 1000);

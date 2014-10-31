@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ColliderScr : MonoBehaviour {
 	
+	private int counter; 
+	
 
 	// Use this for initialization
 	void Start () {
@@ -11,6 +13,14 @@ public class ColliderScr : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		if( counter >= 150)
+		{
+			// if the bullet does not hit the grid then it will deistory its self 
+			//Destroy(gameObject);
+		}
+		
+		counter++;
 	
 	}
 	
